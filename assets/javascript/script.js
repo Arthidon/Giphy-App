@@ -1,9 +1,9 @@
 //https://api.giphy.com/v1/gifs/search?api_key=8LSSyXVeg1F9AE3vZP6m6U0ZEVSssOv7&q=lion king&limit=25&offset=0&rating=G&lang=en
 var buttons = ['Batman', 'Superman', 'Aquaman'];
 
-function loadButtons() {
-    var listButtons = JSON.parse(localStorage.getItem('buttons'));
-    buttons = listButtons;
+function loadbuttons () {
+   var listButtons = JSON.parse(localStorage.getItem('buttons') );
+   buttons = listButtons;
 }
 
 
@@ -31,18 +31,18 @@ function renderButtons() {
     localStorage.setItem('buttons', JSON.stringify(buttons));
 }
 
-loadButtons();
+loadbuttons ()
 renderButtons();
 
 
-$('#submit-button').on('click', function(event) {
+$('#submit-button').on('click', function (event) {
     event.preventDefault();
 
 
-var value = $('#search').val();
-buttons.push(value);
-renderButtons();
+    var value = $('#search').val();
+    buttons.push(value);
+    renderButtons();
 
-console.log('Value: ', value);
+    console.log('Value: ', value);
 
 });
