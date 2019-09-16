@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+
+  <title>GIPHY APP</title>
+
+  <meta name="author" content="SitePoint">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.2/css/all.min.css">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+
+<body>
+
+
+<div class="container">
+  <h1>Giphy App</h1>
+
+  <!--  search div -->
+  <div class="form">
+    <form>
+      <input type="text" id="search" class="form-control" placeholder="Search Giphy.." />
+      <button class="btn btn-primary" id="submit-button">Search</button>
+      <button class="btn btn-primary" id="clear-results">Clear Results</button>
+    </form>
+
+    <!-- recent search Buttons-->
+    <div class="recent-search"></div>
+
+    <!---Favorite Check Box-->
+    <div class="form-group form-check">
+      <input type="checkbox" class="form-check-input" id="favorite-only">
+      <label class="form-check-label" for="exampleCheck1">Favorite Only</label>
+    </div>
+
+    <!--GIPHY CONTENT-->
+    <div class="giphy-content"></div>
+
+    <!-- search / clear results form container -->
+  </div>
+
+  <!--Main container -->
+</div>
+
+
+
+
+
+
+    <script
+    src="http://code.jquery.com/jquery-3.4.1.min.js"
+    integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+    crossorigin="anonymous"></script>
+    <script src="assets/javascript/script.js"></script>
+</body>
+</html>
