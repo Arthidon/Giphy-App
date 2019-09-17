@@ -50,6 +50,9 @@ $(document).ready(function () {
         console.log('Value: ', value);
     }
     function createGiphyTemplate(giphy){
+
+       timeConversion =  moment(giphy.import_datetime).fromNow();
+
         images = giphy.images;
         template = `
         <div class="giphy">
@@ -63,8 +66,8 @@ $(document).ready(function () {
                 <i class="fa fa-play img-play"></i>
             </div>
             <div class="giphy-info">
-                <p>Rating: g</p>
-                <p>Posted A Year Ago</p>
+                <p>Rating: ${giphy.rating}</p>
+                <p>${timeConversion}</p>
             </div>
 
             <div class="giphy-footer" data-link="${giphy.embed_url}"> 
