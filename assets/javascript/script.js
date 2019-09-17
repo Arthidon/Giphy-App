@@ -1,11 +1,11 @@
 //https://api.giphy.com/v1/gifs/search?api_key=8LSSyXVeg1F9AE3vZP6m6U0ZEVSssOv7&q=lion king&limit=25&offset=0&rating=G&lang=en
-var buttons = ['Batman', 'Superman', 'Aquaman'];
+
 
 function loadbuttons () {
+    
    var listButtons = JSON.parse(localStorage.getItem('buttons') );
    buttons = listButtons;
 }
-
 
 function renderButtons() {
     $('.recent-search').empty();
@@ -19,7 +19,7 @@ function renderButtons() {
             <button class="btn btn-search" data-name="${buttonName}">
             ${buttonName}
             </button>
-            <button class="btn btn-delete fas fa-times"" data-name"${buttonName}">
+            <button class="btn btn-delete fas fa-times" data-name"${buttonName}">
             </button>
         </div>
         `;
@@ -30,9 +30,6 @@ function renderButtons() {
 
     localStorage.setItem('buttons', JSON.stringify(buttons));
 }
-
-loadbuttons ()
-renderButtons();
 
 
 $('#submit-button').on('click', function (event) {
@@ -46,3 +43,12 @@ $('#submit-button').on('click', function (event) {
     console.log('Value: ', value);
 
 });
+
+//$(document).on('click', '.btn-delete' , function() {
+
+//});
+
+var buttons = ['Batman', 'Superman', 'Aquaman'];
+localStorage.setItem('buttons', JSON.stringify(buttons));
+loadbuttons ();
+renderButtons();
