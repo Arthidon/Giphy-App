@@ -108,7 +108,8 @@ $(document).ready(function () {
         if (buttons.includes(value)){
             alert('No duplicates allowed');
 
-        }else {
+        }
+            else {
             
             addButton(value);
             localStorage.setItem('buttons', JSON.stringify(buttons));
@@ -174,15 +175,28 @@ function searchGiphyByButton(){
         $('.giphy-content').html('<p>Results Cleared!!!');
     }
 
-
+    function generateRandom(arr) {
+        if (arr.length > 0) {
+            index = Math.floor(Math.random() * arr.length);
+            value = arr[index];
+            return value;
+        }
+        return 'superman';
+    }
+    function initApp() {
+        value = generateRandom(buttons);
+        loadbuttons ();
+        renderButtons();
+        fetchGiphy(value);
+    }
 
 // variables 
 var buttons = ['Batman', 'Superman', 'Aquaman'];
 var API_KEY = '8LSSyXVeg1F9AE3vZP6m6U0ZEVSssOv7';
 var endpoint = "http://api.giphy.com/v1/gifs/search?&api_key=8LSSyXVeg1F9AE3vZP6m6U0ZEVSssOv7";
-loadbuttons ();
-renderButtons();
-
+//loadbuttons ();
+//renderButtons();
+initApp();
 //On click events
 $(document).on('click', '.btn-delete' , removeButton);
 $(document).on('click', '.giphy-image', imgCardClick);
