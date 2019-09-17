@@ -52,11 +52,14 @@ $(document).ready(function () {
     function createGiphyTemplate(giphy){
 
        timeConversion =  moment(giphy.import_datetime).fromNow();
+        starIndex = favorite.indexOf(giphy.id);
+        isStar = starIndex !== -1 ? 'fas' : 'far';
+
 
         images = giphy.images;
         template = `
         <div class="giphy">
-            <i class="far fa-star favorite" data-id="${giphys.id}" data-star="false">
+            <i class="${isStar} fa-star favorite" data-id="${giphy.id}" data-star="${isStar}">
             </i>
             <div class="giphy-image">
                 <img src="${images.original_still.url}" 
@@ -194,8 +197,38 @@ function searchGiphyByButton(){
             $('#submit-button').prop('disabled', true);
         }
     }
+
+        function setFavorite() {
+            localStorage.setItem('favorite', JSON.stringify(favorite));
+    }
+    function loadLoadfavorite() {
+        stars = JSON.parse(localStorage.getItem('favorite'));
+
+        if(Array.isArray(stars)){
+            favorite = stars;
+        }
+    }
+
+    function handleFavorite(){
+        star = $(this).attr('data-star');
+        id = $(this).attr('data-id');
+
+        console.log(id);
+        if ( star === 'far') {
+            favorite.push(id);
+            setFavorite();
+            $(this).removeClass('far').addClass('fas');
+            $(this).attr('data-star', 'fas');
+        }else {
+            favorite = favorite.filter((el) => el != id);
+            setFavorite();
+            $(this).removeClass('fas').addClass('far');
+            $(this).attr('data-star', 'far');
+        }
+    }
     function initApp() {
         value = generateRandom(buttons);
+        loadLoadfavorite();
         loadbuttons ();
         renderButtons();
         fetchGiphy(value);
@@ -205,6 +238,7 @@ function searchGiphyByButton(){
 var buttons = ['Batman', 'Superman', 'Aquaman'];
 var API_KEY = '8LSSyXVeg1F9AE3vZP6m6U0ZEVSssOv7';
 var endpoint = "http://api.giphy.com/v1/gifs/search?&api_key=8LSSyXVeg1F9AE3vZP6m6U0ZEVSssOv7";
+var favorite = [];
 //loadbuttons ();
 //renderButtons();
 initApp();
@@ -213,6 +247,7 @@ $(document).on('click', '.btn-delete' , removeButton);
 $(document).on('click', '.giphy-image', imgCardClick);
 $(document).on('click', '.giphy-footer', copyLink);
 $(document).on('click', '.btn-search', searchGiphyByButton);
+$(document).on('click', '.favorite', handleFavorite);
 
 $('#clear-results').on('click', clearResults);
 $('#submit-button').on('click', searchGiphy);
