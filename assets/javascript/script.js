@@ -98,6 +98,8 @@ $(document).ready(function () {
         $.ajax({ url: url})
         .then(function(response){
             giphys = response.data;
+            previousSearch = giphys;
+
             renderGiphys(giphys);
             console.log('Giphys: ', response);
         })
@@ -226,6 +228,35 @@ function searchGiphyByButton(){
             $(this).attr('data-star', 'far');
         }
     }
+    function renderFavoriteGiphy(giphy) {
+        giphyTemplate = createGiphyTemplate(giphy);
+        $('.giphy-content').append(giphyTemplate);
+    }
+
+    function favoriteFilter() {
+        isFavoriteOnly = $(this).is(':checked');
+
+        if (isFavoriteOnly) {
+            $('.giphy-content').empty();
+            for (i = 0; i <favorite.length; i++){
+                id = favorite[i];
+                url = `https://api.giphy.com/v1/gifs/${id}?&api_key=8LSSyXVeg1F9AE3vZP6m6U0ZEVSssOv7`;
+
+                $.ajax({ url: url })
+                    .then((response) => {
+                        renderFavoriteGiphy(response.data);
+                        console.log('Rsponse: ', response);
+                    })
+                    .catch((error) => {
+                        console.log('Error: ', error);
+                    });
+            }
+        }else {
+            renderGiphys(previousSearch);
+
+        }
+    }
+
     function initApp() {
         value = generateRandom(buttons);
         loadLoadfavorite();
@@ -239,6 +270,7 @@ var buttons = ['Batman', 'Superman', 'Aquaman'];
 var API_KEY = '8LSSyXVeg1F9AE3vZP6m6U0ZEVSssOv7';
 var endpoint = "http://api.giphy.com/v1/gifs/search?&api_key=8LSSyXVeg1F9AE3vZP6m6U0ZEVSssOv7";
 var favorite = [];
+var previousSearch = [];
 //loadbuttons ();
 //renderButtons();
 initApp();
@@ -252,6 +284,8 @@ $(document).on('click', '.favorite', handleFavorite);
 $('#clear-results').on('click', clearResults);
 $('#submit-button').on('click', searchGiphy);
 $('#search').on('keyup', disableSearch);
+$('#favorite-only').on('click', favoriteFilter);
+
 
 
 //document.ready
