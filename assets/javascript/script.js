@@ -92,6 +92,9 @@ $(document).ready(function () {
 
 
     function fetchGiphy(value) {
+
+        //uncheck 
+        onCheck();
         //AJAX
         url = endpoint + '&q=' + value;
 
@@ -179,6 +182,7 @@ function searchGiphyByButton(){
 }
     function clearResults() {
         event.preventDefault();
+        onCheck();
         $('.btn').parent().removeClass('active');
         $('.giphy-content').html('<p>Results Cleared!!!');
     }
@@ -253,8 +257,12 @@ function searchGiphyByButton(){
             }
         }else {
             renderGiphys(previousSearch);
-
+            
         }
+    }
+
+    function onCheck() {
+        $('#favoites-only').prop('checked', false);
     }
 
     function initApp() {
