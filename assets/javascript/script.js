@@ -1,25 +1,23 @@
 //https://api.giphy.com/v1/gifs/search?api_key=8LSSyXVeg1F9AE3vZP6m6U0ZEVSssOv7&q=lion king&limit=25&offset=0&rating=G&lang=en
 $(document).ready(function(){
 
-function loadbuttons () {
-    v = localStorage.getItem('buttons');
-    if (v) {
-   var listButtons = JSON.parse(localStorage.getItem('buttons') );
-   buttons = listButtons;
-}
-else {
-    buttons = ['Batman', 'Superman', 'Aquaman'];
-}
-}
+    function loadbuttons() {
+        v = localStorage.getItem('buttons');
+        if (v) {
+            var listButtons = JSON.parse(localStorage.getItem('buttons'));
+            buttons = listButtons;
+        }
+        else {
+            buttons = ['Batman', 'Superman', 'Aquaman'];
+        }
+    }
 
-function renderButtons() {
-    $('.recent-search').empty();
-    for (var i = 0; i < buttons.length; i++) {
-        var buttonName = buttons[i];
-        
-        
+    function renderButtons() {
+        $('.recent-search').empty();
+        for (var i = 0; i < buttons.length; i++) {
+            var buttonName = buttons[i];
 
-        var button = `
+            var button = `
         <div class="wrap-buttons">
             <button 
                 class="btn btn-search" 
@@ -33,35 +31,31 @@ function renderButtons() {
         </div>
         `;
 
-        $('.recent-search').append(button);
+            $('.recent-search').append(button);
 
+        }
+
+        localStorage.setItem('buttons', JSON.stringify(buttons));
     }
 
+    function removeButton() {
+        buttonIndex = $(this).attr('data-index')
+        buttons.splice(buttonIndex, 1);
+        renderButtons();
+    }
+
+    function addButton(value) {
+        buttons.push(value);
+        renderButtons();
+        console.log('Value: ', value);
+    }
+
+function searchGiphy() {
+    event.preventDefault();
+    var value = $('#search').val();
+    addButton(value);
     localStorage.setItem('buttons', JSON.stringify(buttons));
 }
-
-
-$('#submit-button').on('click', function (event) {
-    event.preventDefault();
-
-
-    var value = $('#search').val();
-    buttons.push(value);
-    localStorage.setItem('buttons', JSON.stringify(buttons));
-    renderButtons();
-
-    console.log('Value: ', value);
-
-});
-
-$(document).on('click', '.btn-delete' , function() {
-    console.log('hello world');
-    buttonIndex = $(this).attr('data-index')
-    console.log('Button Index: ', buttonIndex);
-    buttons.splice(buttonIndex, 1);
-    renderButtons();
-
-});
 
 var buttons = ['Batman', 'Superman', 'Aquaman'];
 
@@ -69,7 +63,9 @@ loadbuttons ();
 renderButtons();
 
 
+$(document).on('click', '.btn-delete' , removeButton);
 
+$('#submit-button').on('click', searchGiphy);
 
 
 //document.ready
