@@ -183,6 +183,14 @@ function searchGiphyByButton(){
         }
         return 'superman';
     }
+    function disableSearch() {
+        value = $(this).val();
+        if (value){
+            $('#submit-button').prop('disabled', false);
+        }else {
+            $('#submit-button').prop('disabled', true);
+        }
+    }
     function initApp() {
         value = generateRandom(buttons);
         loadbuttons ();
@@ -205,6 +213,7 @@ $(document).on('click', '.btn-search', searchGiphyByButton);
 
 $('#clear-results').on('click', clearResults);
 $('#submit-button').on('click', searchGiphy);
+$('#search').on('keyup', disableSearch);
 
 
 //document.ready
