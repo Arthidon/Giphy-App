@@ -157,6 +157,9 @@ function clipToClipBoard(value) {
     }
 function searchGiphyByButton(){
     buttonName = $(this).attr('data-name');
+    parent = $(this).parent();
+    $('.btn').parent().removeClass('active');
+    parent.addClass('active');
     fetchGiphy(buttonName);
 }
 
