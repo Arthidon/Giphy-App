@@ -49,27 +49,63 @@ $(document).ready(function () {
         renderButtons();
         console.log('Value: ', value);
     }
+    function createGiphyTemplate(giphy){
+        images = giphy.images;
+        template = `
+        <div class="giphy">
+            <i class="far fa-star favorite" data-id="${giphys.id}" data-star="false">
+            </i>
+            <div class="giphy-image">
+                <img src="${images.original_still.url}" 
+                data-still="${images.original_still.url}" 
+                data-animate="${images.original.url}" 
+                data-state="still">
+                <i class="fa fa-play img-play"></i>
+            </div>
+            <div class="giphy-info">
+                <p>Rating: g</p>
+                <p>Posted A Year Ago</p>
+            </div>
+
+            <div class="giphy-footer" data-link="${giphy.embed_url}"> 
+                <p>Copy Link <i class="fa fa-link"></i></p>
+            </div>
+        </div>
+        `;
+        return template;
+    }
+    function renderGiphys(giphys) {
+        for (var i = 0; i < giphys.length; i++) {
+            giphy = giphys[i];
+            giphyTemplate = createGiphyTemplate(giphy)
+            $('.giphy-content').append(giphyTemplate);
+        }
+    }
+
+
+    function fetchGiphy(value) {
+        //AJAX
+        url = endpoint + '&q=' + value;
+
+        $.ajax({ url: url})
+        .then(function(response){
+            giphys = response.data;
+            renderGiphys(giphys);
+            console.log('Giphys: ', response);
+        })
+        .catch(function(error){
+            console.log('Error: ', error);
+        });
+        
+    }
+
 
     function searchGiphy(event) {
         event.preventDefault();
         var value = $('#search').val();
         addButton(value);
         localStorage.setItem('buttons', JSON.stringify(buttons));
-
-
-        //AJAX
-
-        url = endpoint + '&q=' + value;
-
-        $.ajax({ url: url})
-        .then(function(data){
-            console.log('Data: ', data);
-        })
-        .catch(function(error){
-            console.log('Error: ', error);
-        });
-
-        console.log('Value: ', value);
+        fetchGiphy(value);
     }
 
 
