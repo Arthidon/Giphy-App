@@ -108,6 +108,9 @@ $(document).ready(function () {
         addButton(value);
         localStorage.setItem('buttons', JSON.stringify(buttons));
         fetchGiphy(value);
+
+        $('#search').val(''); // clearing value
+
     }
 
 
@@ -152,7 +155,10 @@ function clipToClipBoard(value) {
         $(this).html('Coppied!!!');
         setTimeout(() => $(this).html(content),3000);
     }
-
+function searchGiphyByButton(){
+    buttonName = $(this).attr('data-name');
+    fetchGiphy(buttonName);
+}
 
 // variables 
 var buttons = ['Batman', 'Superman', 'Aquaman'];
@@ -165,6 +171,7 @@ renderButtons();
 $(document).on('click', '.btn-delete' , removeButton);
 $(document).on('click', '.giphy-image', imgCardClick);
 $(document).on('click', '.giphy-footer', copyLink);
+$(document).on('click', '.btn-search', searchGiphyByButton);
 $('#submit-button').on('click', searchGiphy);
 
 
