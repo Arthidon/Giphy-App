@@ -276,7 +276,7 @@ function searchGiphyByButton(){
 // variables 
 var buttons = ['Batman', 'Superman', 'Aquaman'];
 var API_KEY = '8LSSyXVeg1F9AE3vZP6m6U0ZEVSssOv7';
-var endpoint = "http://api.giphy.com/v1/gifs/search?&api_key=8LSSyXVeg1F9AE3vZP6m6U0ZEVSssOv7";
+var endpoint = "https://api.giphy.com/v1/gifs/search?&api_key=8LSSyXVeg1F9AE3vZP6m6U0ZEVSssOv7";
 var favorite = [];
 var previousSearch = [];
 //loadbuttons ();
