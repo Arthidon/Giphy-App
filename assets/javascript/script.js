@@ -105,9 +105,15 @@ $(document).ready(function () {
     function searchGiphy(event) {
         event.preventDefault();
         var value = $('#search').val();
-        addButton(value);
-        localStorage.setItem('buttons', JSON.stringify(buttons));
-        fetchGiphy(value);
+        if (buttons.includes(value)){
+            alert('No duplicates allowed');
+
+        }else {
+            
+            addButton(value);
+            localStorage.setItem('buttons', JSON.stringify(buttons));
+            fetchGiphy(value);
+        }
 
         $('#search').val(''); // clearing value
 
@@ -162,6 +168,13 @@ function searchGiphyByButton(){
     parent.addClass('active');
     fetchGiphy(buttonName);
 }
+    function clearResults() {
+        event.preventDefault();
+        $('.btn').parent().removeClass('active');
+        $('.giphy-content').html('<p>Results Cleared!!!');
+    }
+
+
 
 // variables 
 var buttons = ['Batman', 'Superman', 'Aquaman'];
@@ -175,6 +188,8 @@ $(document).on('click', '.btn-delete' , removeButton);
 $(document).on('click', '.giphy-image', imgCardClick);
 $(document).on('click', '.giphy-footer', copyLink);
 $(document).on('click', '.btn-search', searchGiphyByButton);
+
+$('#clear-results').on('click', clearResults);
 $('#submit-button').on('click', searchGiphy);
 
 
