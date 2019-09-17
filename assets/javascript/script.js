@@ -75,9 +75,11 @@ $(document).ready(function () {
         return template;
     }
     function renderGiphys(giphys) {
+        $('.giphy-content').empty();
         for (var i = 0; i < giphys.length; i++) {
             giphy = giphys[i];
             giphyTemplate = createGiphyTemplate(giphy)
+            
             $('.giphy-content').append(giphyTemplate);
         }
     }
@@ -109,6 +111,47 @@ $(document).ready(function () {
     }
 
 
+function imgCardClick() {
+    giphyCard = $(this);
+    img = giphyCard.find('img');
+    icon = giphyCard.find('i');
+    still = img.attr('data-still');
+    animate = img.attr('data-animate');
+    state = img.attr('data-state');
+
+    if (state === 'still') {
+        img.attr({
+            src:animate,
+            'data-state': 'animate'
+        });
+
+        icon.removeClass('img-play');
+
+    }else {
+        img.attr({
+            src: still,
+            'data-state': 'still'
+        });
+
+        icon.addClass("img-play");
+    }
+}
+
+function clipToClipBoard(value) {
+    tempElement = $('<input>');
+    $('body').append(tempElement);
+
+    tempElement.val(value).select();
+    document.execCommand('copy');
+    tempElement.remove();
+}
+    function copyLink() {
+        link = $(this).attr('data-link');
+        content = $(this).html();
+        clipToClipBoard(link);
+        $(this).html('Coppied!!!');
+        setTimeout(() => $(this).html(content),3000);
+    }
 
 
 // variables 
@@ -120,6 +163,8 @@ renderButtons();
 
 //On click events
 $(document).on('click', '.btn-delete' , removeButton);
+$(document).on('click', '.giphy-image', imgCardClick);
+$(document).on('click', '.giphy-footer', copyLink);
 $('#submit-button').on('click', searchGiphy);
 
 

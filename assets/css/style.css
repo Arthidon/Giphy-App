@@ -14,3 +14,61 @@
     border-left: 1px solid black;
     border-radius: 0;
 }
+.giphy-content {
+    column-count: 3;
+    column-gap: 1em;
+}
+.giphy {
+    border: 1px solid #ffd5d5;
+    page-break-inside: avoid;
+    border-radius: .5em;
+    border-bottom: .5em solid lightgray;
+    position: relative;
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+    margin-bottom: .5em;
+    background-color: #fff1e9;
+    box-shadow: 9px 20px 10px rgba(0, 0, 0, 0)
+
+}
+.giphy img {
+    width: 100%;
+    height: 100%;
+}
+.fa-play {
+    font-size: .9em;
+    background-color: slateblue;
+    border-radius: 50%;
+    padding: 1em;
+    position: absolute;
+    top: 25%;
+    left: 50%;
+    transform: translate(-50%, 0);
+    color: white;
+    opacity: 0;
+    cursor: pointer;
+}
+.giphy-image:hover .img-play {
+    opacity: 1;
+}
+.favorite {
+    position: absolute;
+    right: 0;
+    cursor: pointer;
+    border-bottom-left-radius: .5em;
+    background-color: lightgray;
+}
+.giphy-info{
+    display: flex;
+    justify-content: space-between;
+    margin: 2em .5em
+}
+.giphy-footer {
+    text-align: center;
+    border: 1px solid lightgray;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    cursor: pointer;
+}
